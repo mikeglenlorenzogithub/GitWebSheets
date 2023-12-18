@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block content %}
+<div id="content-home" class="container">
+    <form method="POST" action="/scraping">
+        <input type="submit" id='scraping' name="scraping" value="Click to start processing">
+    </form>
+    <br/>
+    <br/>
+    <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=0" target="_blank">
+        <h3 class="text-center">
+            Click to see the result!
+        </h3>
+    </a>
+</div>
+
+<py-script src="website/static/run_scraping.py">
+
+</py-script>
+
+{% endblock %}

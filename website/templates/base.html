@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- INSERT CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="static/style.css"
+        />
+        <title>{% block title %}Base{% endblock %}</title>
+    </head>
+    <body>
+        <!-- CREATE NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-lg" style="background-color: #16262f">
+            <button
+                class="navbar-toggle"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" id="home" href="/">Home</a>
+                    <a class="nav-item nav-link" id="report" href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=0" target="_blank">Sheet</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- CREATING NEW TEMPLATE TO BE CALLED -->
+        <div class="button-process container">
+            <!-- JUMBOTRON -->
+            <section id="adds" class="jumbotron text-center">
+                {% block content %}
+                {% endblock %}
+            </section>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#bee6ee" fill-opacity="1" d="M0,128L288,96L576,288L864,64L1152,64L1440,192L1440,0L1152,0L864,0L576,0L288,0L0,0Z"></path>
+            </svg>
+            <!-- JUMBOTRON -->
+        </div>
+
+        <!-- About -->
+        <section id="about">
+            <div class="link container">
+                <div class="row text-center">
+                    <h4>Other Projects</h4>
+                    <div class="col">
+                        <a href="https://github.com/mikeglenlorenzogithub/GitWebsiteGame" target="_blank">Website Game Github</a>
+                    </div>
+                    <div class="col">
+                        <a href="https://github.com/mikeglenlorenzogithub/GitWebScrapping" target="_blank">Web Scrapping Project</a>
+                    </div>
+                    <div class="col">
+                        <a href="https://github.com/mikeglenlorenzogithub/GitDataScientist" target="_blank">Data Science Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p>&copy; 2023. <b>michael glen lorenzo</b> All Rights Served.</p>
+            </div>
+        </section>
+
+        <!-- SCRIPT SHOULD BE ON THE BOTTOM -->
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+            <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+    </body>
+</html>

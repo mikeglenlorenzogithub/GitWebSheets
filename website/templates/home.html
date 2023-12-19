@@ -2,20 +2,79 @@
 
 {% block content %}
 <div id="content-home" class="container">
-    <form method="POST" action="/scraping">
-        <input type="submit" id='scraping' name="scraping" value="Click to start processing">
-    </form>
+    <h5 class="instruction">Please wait patiently while the scraping program is running</h3>
     <br/>
-    <br/>
-    <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=0" target="_blank">
-        <h3 class="text-center">
-            Click to see the result!
-        </h3>
-    </a>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message container">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div id='scraping-abahouse'>
+        <form class="scraping" method="POST" action="/scraping-abahouse">
+            <input class="scraping" type="submit" name="scraping-abahouse" value="Start scraping abahouse">
+        </form>
+        <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=1617524685" target="_blank">
+            <h6 class="text-center">
+                Click to see abahouse result!
+            </h6>
+        </a>
+    </div>
+
+    <div id='scraping-adabat'>
+        <form class="scraping" method="POST" action="/scraping-adabat">
+            <input class="scraping" type="submit" name="scraping-adabat" value="Start scraping adabat">
+        </form>
+        <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=1384088225" target="_blank">
+            <h6 class="text-center">
+                Click to see adabat result!
+            </h6>
+        </a>
+    </div>
+
+    <div id='scraping-adametrope'>
+        <form class="scraping" method="POST" action="/scraping-adametrope">
+            <input class="scraping" type="submit" name="scraping-adametrope" value="Start scraping adametrope">
+        </form>
+        <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=647396065" target="_blank">
+            <h6 class="text-center">
+                Click to see adametrope result!
+            </h6>
+        </a>
+    </div>
+
+    <div id='scraping-anteprima'>
+        <form class="scraping" method="POST" action="/scraping-anteprima">
+            <input class="scraping" type="submit" name="scraping-anteprima" value="Start scraping anteprima">
+        </form>
+        <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=1317092021" target="_blank">
+            <h6 class="text-center">
+                Click to see anteprima result!
+            </h6>
+        </a>
+    </div>
+
+    <div id='scraping-bape'>
+        <form class="scraping" method="POST" action="/scraping-bape">
+            <input class="scraping" type="submit" name="scraping-bape" value="Start scraping bape">
+        </form>
+        <a href="https://docs.google.com/spreadsheets/d/1omwmuUJqZSLIpRj3WCLOLJvzfwllTEYID0AIb5V47Jg/edit#gid=332122413" target="_blank">
+            <h6 class="text-center">
+                Click to see bape result!
+            </h6>
+        </a>
+    </div>
+
 </div>
 
-<py-script src="website/static/run_scraping.py">
-
-</py-script>
+<!-- <div id='terminate-script'>
+    <form class="terminate" method="POST" action="/terminate-script">
+        <input class="terminate" type="submit" name="terminate-script" value="Terminate process">
+    </form>
+</div> -->
 
 {% endblock %}

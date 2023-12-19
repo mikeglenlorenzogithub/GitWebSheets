@@ -16,10 +16,10 @@ class ShoppingApparelAdabat():
     def __init__(self):
         self.session = requests.Session()
         self.session_html = HTMLSession()
-        retry = Retry(connect=3, backoff_factor=0.5)
-        adapter = HTTPAdapter(max_retries=retry)
-        self.session.mount('http://', adapter)
-        self.session.mount('https://', adapter)
+        # retry = Retry(connect=3, backoff_factor=0.5)
+        # adapter = HTTPAdapter(max_retries=retry)
+        # self.session.mount('http://', adapter)
+        # self.session.mount('https://', adapter)
 
         self.content = []
         self.file_name = 'shopping_apparel_adabat'
@@ -116,37 +116,36 @@ class ShoppingApparelAdabat():
                 lat_lon = req2.html.find(location, first=True).text.split('LatLng(')[1].split(');')[0].split(',')
                 lat, lon = lat_lon[0].strip(), lat_lon[1].strip()
 
-                # MENYIMPAN DATA
-                data_dict = dict()
-                data_dict['store_name'] = store_name
-                data_dict['chain_name'] = 'アダバット'
-                data_dict['csar_category'] = 'Ss'
-                data_dict['chain_id'] = 'shopping/apparel/adabat'
-                data_dict['e_chain'] = "adabat"
-                data_dict['categories'] = 'apparel'
-                data_dict['業種大'] = 'ショッピング'
-                data_dict['業種中'] = 'アパレル'
-                data_dict['address'] = address
-                data_dict['url_store'] = url_store
-                data_dict['営業時間'] = open_hours
-                data_dict['tel_no'] = tel_no
-                data_dict['lat'] = lat
-                data_dict['lon'] = lon
-                data_dict['gla'] = ''
-                
-                utc_time = pendulum.now()
-                indonesia = utc_time.in_timezone('Asia/Bangkok')
-                data_dict["scrape_date"] = indonesia.strftime("%m/%d/%y")
+                self.save_data(url_store, store_name, address, tel_no, lat, lon)
 
-                self.content.append(data_dict)
-                print(len(self.content), url_store)
-                time.sleep(2)
-            
             if soup.select_one('li[class="search-result__paging__last"] a'):
                 url = soup.select_one('li[class="search-result__paging__last"] a')['href']
                 req = self.session_html.get(url, headers=headers)
             else:
                 break
+
+    def save_data(self, url_store, store_name, address, tel_no, lat, lon):
+        data_dict = dict()
+        data_dict['url_store'] = url_store
+        data_dict['store_name'] = store_name
+        data_dict['brand'] = "adabat"
+        data_dict['address'] = address
+        data_dict['tel_no'] = tel_no
+        data_dict['lat'] = lat
+        data_dict['lon'] = lon
+        data_dict['open_hours'] = ''
+        data_dict['holiday'] = ''
+        data_dict['parking'] = ''
+        data_dict['smoking'] = ''
+        data_dict['additional_info1'] = ''
+        data_dict['additional_info2'] = ''
+        
+        utc_time = pendulum.now()
+        indonesia = utc_time.in_timezone('Asia/Bangkok')
+        data_dict["scrape_date"] = indonesia.strftime("%m/%d/%y")
+
+        self.content.append(data_dict)
+        print(len(self.content), url_store)
 
 if __name__ == '__main__':
     ShoppingApparelAdabat()

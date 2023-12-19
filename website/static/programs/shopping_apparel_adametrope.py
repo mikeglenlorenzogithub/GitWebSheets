@@ -74,15 +74,16 @@ class ShoppingApparelAdametrope():
             raise
 
     def get_data(self):
-        url = 'https://www.adametrope.com/shoplist?_gl=1*gebjch*_ga*NzQ0NDgwMjQ5LjE2Mzg1MjQzMDE.*_ga_Y173CWX5CZ*MTYzODUyNDMwMC4xLjEuMTYzODUyNDMxMy4w&_ga=2.252841418.2121798017.1638524301-744480249.1638524301'
+        # url = 'https://www.adametrope.com/shoplist?_gl=1*gebjch*_ga*NzQ0NDgwMjQ5LjE2Mzg1MjQzMDE.*_ga_Y173CWX5CZ*MTYzODUyNDMwMC4xLjEuMTYzODUyNDMxMy4w&_ga=2.252841418.2121798017.1638524301-744480249.1638524301'
+        url = 'https://www.adametrope.com/shoplist?'
         req = self.s.get(url, headers=self.rand_agent)
         soup = BeautifulSoup(req.content, 'html.parser')
         cards = soup.findAll('article', 'column')
         for card in cards:
-            data_dict = dict()
             store_name = card.find('h2').text.strip().replace('\r\n', ' ')
             address = card.find('ul').findAll('li')[0].text.strip().split('\r\n')[0]
             tel_no = card.find('ul').findAll('li')[1].text.replace('Tel.', '').replace('※店舗通販可能','').strip().replace('ｔel','').replace('.','')
+            open_hours = card.find('ul').findAll('li')[2].text.strip()
             url_map = f"http://www.google.com/maps/search/{' '.join(address.split())}"
             req_map = self.s.get(url_map, allow_redirects=True)
             location = req_map.html.find('meta[property="og:image"]', first=True).attrs['content']
@@ -93,29 +94,30 @@ class ShoppingApparelAdametrope():
                 lat_lon = location.split('center=')[1].split('&zoom')[0].split('%2C')
                 lat, lon = lat_lon[0], lat_lon[1]
             
-            data_dict['store_name'] = store_name
-            data_dict['chain_name'] = 'ADAM ET ROPE'
-            data_dict['CSAR_Category'] = 'SS'
-            data_dict['chain_id'] = 'shopping/apparel/adametrope'
-            data_dict['e_chain'] = 'ADAM ET ROPE'
-            data_dict['categories'] = 'apparel'
-            data_dict['業種大'] = 'ショッピング'
-            data_dict['業種中'] = 'アパレル'
-            data_dict['address'] = address
-            data_dict['url_store'] = url
-            data_dict['url_tenant'] = ''
-            data_dict['営業時間'] = card.find('ul').findAll('li')[2].text.strip()
-            data_dict['lat'] = lat
-            data_dict['lon'] = lon
-            data_dict['tel_no'] = tel_no
-            data_dict['gla'] = ''
+            self.save_data(url, store_name, address, tel_no, open_hours, lat, lon)
 
-            utc_time = pendulum.now()
-            indonesia = utc_time.in_timezone('Asia/Bangkok')
-            data_dict['scrape_date'] = indonesia.strftime('%m/%d/%Y')
+    def save_data(self, url_store, store_name, address, tel_no, open_hours, lat, lon):
+        data_dict = dict()
+        data_dict['url_store'] = url_store
+        data_dict['store_name'] = store_name
+        data_dict['brand'] = 'ADAM ET ROPE'
+        data_dict['address'] = address
+        data_dict['tel_no'] = tel_no
+        data_dict['lat'] = lat
+        data_dict['lon'] = lon
+        data_dict['open_hours'] = open_hours
+        data_dict['holiday'] = ''
+        data_dict['parking'] = ''
+        data_dict['smoking'] = ''
+        data_dict['additional_info1'] = ''
+        data_dict['additional_info2'] = ''
 
-            self.content.append(data_dict)
-            print(len(self.content), url)
+        utc_time = pendulum.now()
+        indonesia = utc_time.in_timezone('Asia/Bangkok')
+        data_dict['scrape_date'] = indonesia.strftime('%m/%d/%Y')
+
+        self.content.append(data_dict)
+        print(len(self.content), url_store)
 
 if __name__ == '__main__':
     ShoppingApparelAdametrope(True)

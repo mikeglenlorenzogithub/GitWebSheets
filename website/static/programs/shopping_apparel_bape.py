@@ -104,36 +104,30 @@ class ShoppingApparelBape():
             lat = lat_lon[0]
             lon = lat_lon[1]
 
-            data_dict = dict()
-            data_dict['url_store'] = url_store
-            data_dict['store_name'] = store_name
-            data_dict['chain_name'] = 'BAPE'
-            data_dict['CSAR_Category'] = 'SS'
-            data_dict['chain_id'] = 'shopping/apparel/bape'
-            data_dict['e_chain'] = 'BAPE'
-            data_dict['categories'] = 'apparel'
-            data_dict['業種大'] = 'ショッピング'
-            data_dict['業種中'] = 'アパレル'
-            data_dict['address'] = address
-            data_dict['lat'] = lat
-            data_dict['lon'] = lon
-            data_dict['tel_no'] = tel_no
-            data_dict['営業時間'] = open_hours
-            data_dict['gla'] = ''
+            self.save_data(url_store, store_name, address, tel_no, open_hours, lat, lon)
 
-            utc_time = pendulum.now()
-            indonesia = utc_time.in_timezone('Asia/Bangkok')
-            data_dict["scrape_date"] = indonesia.strftime('%m/%d/%y')
+    def save_data(self, url_store, store_name, address, tel_no, open_hours, lat, lon):
+        data_dict = dict()
+        data_dict['url_store'] = url_store
+        data_dict['store_name'] = store_name
+        data_dict['brand'] = 'BAPE'
+        data_dict['address'] = address
+        data_dict['tel_no'] = tel_no
+        data_dict['lat'] = lat
+        data_dict['lon'] = lon
+        data_dict['open_hours'] = open_hours
+        data_dict['holiday'] = ''
+        data_dict['parking'] = ''
+        data_dict['smoking'] = ''
+        data_dict['additional_info1'] = ''
+        data_dict['additional_info2'] = ''
 
-            self.content.append(data_dict)
-            print(len(self.content), url_store)
+        utc_time = pendulum.now()
+        indonesia = utc_time.in_timezone('Asia/Bangkok')
+        data_dict['scrape_date'] = indonesia.strftime('%m/%d/%Y')
 
-        self.save_data()
+        self.content.append(data_dict)
+        print(len(self.content), url_store)
 
-    def save_data(self):
-        if self.from_main:
-            df = pd.DataFrame(self.content)
-            df = df.reindex(columns=['store_name', 'chain_name', 'CSAR_Category', 'chain_id', 'e_chain', 'categories', '業種大', '業種中', 'address', 'url_store', 'url_tenant', '営業時間', '定休日', '駐車場', '禁煙・喫煙', '取扱', '備考', 'lat', 'lon', 'tel_no', 'gla', 'scrape_date'])
-          
 if __name__ == '__main__':
     ShoppingApparelBape(True)

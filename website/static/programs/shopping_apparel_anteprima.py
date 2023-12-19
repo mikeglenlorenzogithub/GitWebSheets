@@ -100,19 +100,9 @@ class ShoppingApparelAnteprima():
                 except (TypeError, AttributeError):
                     print('TERJADI PERULANGAN req2!!!')
                     time.sleep(3)
-
-            data_dict['store_name'] = soup2.select_one('#stores_detail h3').text
-            data_dict['chain_name'] = 'ANTEPRIMA'
-            data_dict['CSAR_Category'] = 'SS'
-            data_dict['chain_id'] = 'shopping/apparel/anteprima'
-            data_dict['e_chain'] = 'ANTEPRIMA'
-            data_dict['categories'] = 'apparel'
-            data_dict['業種大'] = 'ショッピング'
-            data_dict['業種中'] = 'アパレル'
-            data_dict['address'] = soup2.select_one('#stores_access section p').text
-            maps_link = 'https://www.google.com/maps/search/' + data_dict['address']
-
-            data_dict['lat'], data_dict['lon'] = '', ''
+            
+            store_name = soup2.select_one('#stores_detail h3').text
+            address = soup2.select_one('#stores_access section p').text
             try:
                 tel_no = ' '.join(soup2.select_one('#stores_info td.tel').text.split())
                 tel_no = tel_no.replace(' ','-')
@@ -120,22 +110,35 @@ class ShoppingApparelAnteprima():
                 tel_no = soup2.select_one('#stores_info td.tel').text.split()
                 tel_no = tel_no.replace(' ','-')
 
-            data_dict['tel_no'] = tel_no.replace('（代表）','').replace('（大代表）','')
-            data_dict['営業時間'] = ''
-            data_dict['gla'] = ''
-            
-            utc_time = pendulum.now()
-            indonesia = utc_time.in_timezone('Asia/Bangkok')
-            data_dict["scrape_date"] = indonesia.strftime('%m/%d/%y')
-            
-            if data_dict not in self.content:
-                self.content.append(data_dict)
-                print(len(self.content), url_store)
+            tel_no = tel_no.replace('（代表）','').replace('（大代表）','')
+            open_hours = ''
+            lat = ''
+            lon = ''
 
-    def save_data(self):
-        if self.from_main:
-            df = pd.DataFrame(self.content)
-            df = df.reindex(columns=['store_name', 'chain_name', 'CSAR_Category', 'chain_id', 'e_chain', 'categories', '業種大', '業種中', 'address', 'url_store', 'url_tenant', '営業時間', '定休日', '駐車場', '禁煙・喫煙', '取扱', '備考', 'lat', 'lon', 'tel_no', 'gla', 'scrape_date'])
+            self.save_data(url_store, store_name, address, tel_no, open_hours, lat, lon)
+
+    def save_data(self, url_store, store_name, address, tel_no, open_hours, lat, lon):
+        data_dict = dict()
+        data_dict['url_store'] = url_store
+        data_dict['store_name'] = store_name
+        data_dict['brand'] = 'ANTEPRIMA'
+        data_dict['address'] = address
+        data_dict['tel_no'] = tel_no
+        data_dict['lat'] = lat
+        data_dict['lon'] = lon
+        data_dict['open_hours'] = open_hours
+        data_dict['holiday'] = ''
+        data_dict['parking'] = ''
+        data_dict['smoking'] = ''
+        data_dict['additional_info1'] = ''
+        data_dict['additional_info2'] = ''
+
+        utc_time = pendulum.now()
+        indonesia = utc_time.in_timezone('Asia/Bangkok')
+        data_dict['scrape_date'] = indonesia.strftime('%m/%d/%Y')
+
+        self.content.append(data_dict)
+        print(len(self.content), url_store)
 
 if __name__ == '__main__':
     ShoppingApparelAnteprima(True)

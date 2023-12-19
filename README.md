@@ -1,4 +1,4 @@
 # GitWebSheets
-website with the data taken from the sheets api
+web app to get data from web (scrape or even crawl) and put the data in spreadsheet using API
 
 On the way to make some choices, run all or one by one

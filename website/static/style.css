@@ -25,7 +25,6 @@
 
 /* ABOUT */
 #about {
-  position: absolute;
   width: 100%;
   bottom: 0px;
 }
@@ -58,4 +57,14 @@
   padding: 1rem;
   border-radius: 10px 10px 10px 10px;
   background-color: #bee6ee;
+}
+
+.scraping{
+  border-radius: 1rem;
+}
+
+.instruction{
+  padding: 0.5rem;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #ffffff;
 }

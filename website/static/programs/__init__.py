@@ -11,14 +11,14 @@ def get_program():
 
     return list_program
 
-def run_program(list_program):
-    if 'shopping_apparel_abahouse.py' in list_program:
+def run_program(file_name):
+    if 'shopping_apparel_abahouse' in file_name:
         ShoppingApparelAbahouse()
-    if 'shopping_apparel_adabat.py' in list_program:
+    if 'shopping_apparel_adabat' in file_name:
         ShoppingApparelAdabat()
-    if 'shopping_apparel_adametrope.py' in list_program:
+    if 'shopping_apparel_adametrope' in file_name:
         ShoppingApparelAdametrope()
-    if 'shopping_apparel_anteprima.py' in list_program:
+    if 'shopping_apparel_anteprima' in file_name:
         ShoppingApparelAnteprima()
-    if 'shopping_apparel_bape.py' in list_program:
+    if 'shopping_apparel_bape' in file_name:
         ShoppingApparelBape()

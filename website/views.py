@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect
 import time
 import werkzeug.exceptions as ex
 from website.static.run_scraping import run_script
+from website.static.push_bq import push_bq
 
 views = Blueprint('views', __name__)
 
@@ -62,4 +63,15 @@ def scrapingBape():
             flash('The scraping process is done', category='success')
         except:
             flash('There is some trouble while scraping the website', category='error')
+    return render_template("home.html", route='home_page')
+
+# PUSH TO BIGQUERY
+@views.route('/pushbq-abahouse', methods=['POST', 'GET'])
+def pushbqAbahouse():
+    if request.method == 'POST':
+        try:
+            push_bq('shopping_apparel_bape')
+            flash('Append bigquery process is done', category='success')
+        except:
+            flash('There is some trouble while append bigquery', category='error')
     return render_template("home.html", route='home_page')

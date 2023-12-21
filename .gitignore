@@ -2,4 +2,4 @@
 .vscode/settings.json
 desktop.ini
 *.pyc
-# *.json
+*.json

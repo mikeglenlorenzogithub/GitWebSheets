@@ -64,7 +64,15 @@ class ShoppingApparelAnteprima():
                     sheet.insert_row(row, len(sheet.get_all_records())+2)
                     print('CONTINUE')
 
-            self.report.insert_row([self.file_name, x['scrape_date'][0], 'Datanya Lolos checking'], len(self.report.get_all_records())+2)
+            try:
+                self.report.insert_row([self.file_name, x['scrape_date'][0], 'Datanya Lolos checking'], len(self.report.get_all_records())+2)
+            except:
+                print('REACH LIMIT!, REST A LITTLE BIT')
+                time.sleep(60)
+                self.report = get_sheets('reporting.json', 'REPORTING', 'Report')
+                self.report.insert_row([self.file_name, x['scrape_date'][0], 'Datanya Lolos checking'], len(self.report.get_all_records())+2)
+                print('CONTINUE')
+
             print('Datanya Lolos checking... ✔')
 
         except:

@@ -22,7 +22,6 @@ def scrapingAbahouse():
             flash('The scraping process is done', category='success')
         except:
             flash('There is some trouble while scraping the website', category='error')
-            raise
     return render_template("home.html", route='home_page')
 
 @views.route('/scraping-adabat', methods=['POST', 'GET'])

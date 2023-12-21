@@ -2,17 +2,8 @@
 
 {% block content %}
 <div id="content-home" class="container">
-    <h5 class="instruction">Please wait patiently while the scraping program is running</h3>
+    <h5 class="instruction">After clicking please wait patiently while the scraping program is running</h3>
     <br/>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="flash-message container">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 
     <div id='scraping-abahouse'>
         <form class="scraping" method="POST" action="/scraping-abahouse">

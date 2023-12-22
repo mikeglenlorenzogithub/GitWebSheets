@@ -23,9 +23,7 @@ RUN pip install requests
 RUN pip install webdriver-manager
 RUN pip install cloudscraper
 RUN pip install pendulum
-RUN pip install playwright
 RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
 
 # Install manually all the missing libraries
 RUN apt-get update

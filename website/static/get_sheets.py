@@ -11,4 +11,6 @@ def get_sheets(json_key, spreadsheet_name, sheet_name):
         client.open(spreadsheet_name).add_worksheet(sheet_name, rows="1", cols="1")
         sheet = client.open(spreadsheet_name).worksheet(sheet_name)
 
+    print('get_sheets SUCCESS')
+
     return sheet

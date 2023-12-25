@@ -21,7 +21,7 @@ RUN pip install gunicorn
 RUN pip install google-cloud-bigquery
 RUN pip install Flask-RESTful
 RUN pip install pandas
-RUN pip isntall pandas-gbq
+RUN pip install pandas-gbq
 RUN pip install fake-useragent
 RUN pip install requests-html
 RUN pip install requests

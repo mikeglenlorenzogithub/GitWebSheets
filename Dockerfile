@@ -11,18 +11,24 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install production dependencies.
-RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install selenium==4.4.3
+# RUN pip install webdriver-manager
+# RUN pip install cloudscraper
+# RUN pip install google-cloud-storage
+
 RUN pip install gunicorn
-RUN pip install google-cloud-storage
+RUN pip install google-cloud-bigquery
 RUN pip install Flask-RESTful
 RUN pip install pandas
+RUN pip isntall pandas-gbq
 RUN pip install fake-useragent
 RUN pip install requests-html
-RUN pip install selenium==4.4.3
 RUN pip install requests
-RUN pip install webdriver-manager
-RUN pip install cloudscraper
 RUN pip install pendulum
+RUN pip install gspread
+RUN pip install oauth2client
+RUN pip install bs4
 RUN pip install --no-cache-dir --upgrade pip
 
 # Install manually all the missing libraries

@@ -46,6 +46,7 @@
   border-radius: 50px 50px 50px 50px;
   background-color: rgb(255, 255, 255);
   margin: 1px 1rem 1px 1rem;
+  border-style: outset;
 }
 
 .link h4{
@@ -63,8 +64,16 @@
   border-radius: 1rem;
 }
 
-.instruction{
-  padding: 0.5rem;
+.instruction-alert{
   border-radius: 10px 10px 10px 10px;
   background-color: #ffffff;
+}
+
+.scraping-button{
+  border-radius: 50px 50px 50px 50px;
+  border-style: outset;
+}
+
+.scraping-button .row{
+  padding-top: 0.5rem;
 }

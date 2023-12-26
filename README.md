@@ -16,3 +16,21 @@ resources:
     cpu: 1
     memory_gb: 0.5
     disk_size_gb: 10
+
+# QUERY CONVERT STRING TO DATE
+BEGIN TRANSACTION;
+
+UPDATE `glass-world-403808.scrapingdata.scraping_convert`
+SET scrape_date = '2023-12-25'
+WHERE scrape_date = '12/25/23';
+
+UPDATE `glass-world-403808.scrapingdata.scraping_convert`
+SET scrape_date = '2023-12-25'
+WHERE scrape_date = '12/25/2023';
+
+SELECT CAST(scrape_date AS DATE) FROM `glass-world-403808.scrapingdata.scraping_convert`;
+
+SELECT scrape_date FROM `glass-world-403808.scrapingdata.scraping_convert`;
+
+ROLLBACK TRANSACTION;
+-- COMMIT TRANSACTION;

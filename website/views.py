@@ -14,6 +14,10 @@ views = Blueprint('views', __name__)
 def home():
     return render_template("home.html", route='home_page')
 
+@views.route('/visual')
+def visual():
+    return render_template("visual.html", route='visual_page')
+
 # RUN PYTHON SCRIPT IN HTML
 
 # RUN SCRAPING PROGRAM
